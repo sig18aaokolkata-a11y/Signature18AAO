@@ -40,8 +40,7 @@
       min-height:100vh;
       background-color:var(--navy-mid);
       background-image:linear-gradient(135deg,rgba(10,26,59,0.78) 0%,rgba(17,35,84,0.68) 100%),url('building.png');
-      background-size:cover;
-      background-position:center;
+      background-size:cover;background-position:center;
       display:flex;align-items:center;justify-content:center;padding:68px 5% 50px;position:relative;text-align:center;
     }
     .hero-left{max-width:780px;animation:fadeUp 0.9s ease both;display:flex;flex-direction:column;align-items:center;}
@@ -92,13 +91,14 @@
 
     /* MEMBERS */
     #members{background:var(--off-white);}
-    .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;max-width:1100px;margin-top:1.5rem;}
-    .doc-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.6rem;display:flex;flex-direction:column;gap:0.8rem;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;}
-    .doc-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(10,26,59,0.08);transform:translateY(-3px);}
-    .doc-icon-wrap{width:44px;height:44px;background:var(--gold-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
-    .doc-card h4{font-size:0.92rem;font-weight:600;color:var(--navy);}
-    .doc-card p{font-size:0.8rem;color:var(--text-light);line-height:1.5;flex:1;}
-    .doc-link{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
+    .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.8rem;max-width:1100px;margin-top:1.5rem;}
+    .doc-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1rem 1.2rem;display:flex;align-items:flex-start;gap:0.8rem;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;}
+    .doc-card:hover{border-color:var(--gold);box-shadow:0 4px 16px rgba(10,26,59,0.08);transform:translateY(-2px);}
+    .doc-icon-wrap{width:36px;height:36px;background:var(--gold-pale);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:2px;}
+    .doc-card-text{flex:1;}
+    .doc-card h4{font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem;}
+    .doc-card p{font-size:0.75rem;color:var(--text-light);line-height:1.4;margin-bottom:0.3rem;}
+    .doc-link{font-size:0.75rem;color:var(--gold);text-decoration:none;font-weight:600;white-space:nowrap;}
     .members-note{background:var(--navy);color:rgba(255,255,255,0.7);border-radius:4px;padding:0.8rem 1.2rem;font-size:0.82rem;display:flex;align-items:center;gap:0.6rem;margin-top:1rem;max-width:1100px;}
 
     /* EVENTS */
@@ -176,6 +176,7 @@
       .nav-links.open{display:flex;}
       .hamburger{display:flex;}
       .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+      .members-grid{grid-template-columns:repeat(2,1fr);}
     }
   </style>
 </head>
@@ -299,16 +300,16 @@
   <div class="gold-bar reveal"></div>
   <p class="section-sub reveal">Access society documents, meeting records, and important information.</p>
   <div class="members-grid">
-    <div class="doc-card reveal"><div class="doc-icon-wrap">📋</div><h4>Meeting Minutes</h4><p>AGM &amp; monthly committee meeting notes and resolutions</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">💰</div><h4>Society Documents</h4><p>Annual financial statements, budgets, and audit reports</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">📜</div><h4>Rules &amp; Bylaws</h4><p>Association rules, regulations, and resident guidelines</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">🔧</div><h4>Maintenance Log</h4><p>History of repair work orders and service records</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">📞</div><h4>Emergency Contacts</h4><p>Plumber, electrician, security, fire, and more</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">🗳️</div><h4>Committee Details</h4><p>Elected members, their roles and contact information</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">💳</div><h4>Pay Maintenance</h4><p>Bank details and UPI ID for dues payment</p><a href="#" class="doc-link">View →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">📝</div><h4>Contact the Association</h4><p>Submit complaints, requests or queries to the committee</p><a href="#contact" class="doc-link">Contact Us →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">👥</div><h4>Residents List</h4><p>Directory of all apartment owners and residents</p><a href="#" class="doc-link">Open →</a></div>
-    <div class="doc-card reveal"><div class="doc-icon-wrap">🏛️</div><h4>Community Hall Booking</h4><p>Reserve the community hall for events and gatherings</p><a href="#" class="doc-link">Book Now →</a></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">📋</div><div class="doc-card-text"><h4>Meeting Minutes</h4><p>AGM &amp; committee notes</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">💰</div><div class="doc-card-text"><h4>Society Documents</h4><p>Financial statements &amp; audits</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">📜</div><div class="doc-card-text"><h4>Rules &amp; Bylaws</h4><p>Regulations &amp; guidelines</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">🔧</div><div class="doc-card-text"><h4>Maintenance Log</h4><p>Repair &amp; service records</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">📞</div><div class="doc-card-text"><h4>Emergency Contacts</h4><p>Plumber, electrician &amp; more</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">🗳️</div><div class="doc-card-text"><h4>Committee Details</h4><p>Elected members &amp; roles</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">💳</div><div class="doc-card-text"><h4>Pay Maintenance</h4><p>Bank &amp; UPI details</p><a href="#" class="doc-link">View →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">📝</div><div class="doc-card-text"><h4>Contact the Association</h4><p>Complaints &amp; queries</p><a href="#contact" class="doc-link">Contact Us →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">👥</div><div class="doc-card-text"><h4>Residents List</h4><p>Apartment owners directory</p><a href="#" class="doc-link">Open →</a></div></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">🏛️</div><div class="doc-card-text"><h4>Community Hall Booking</h4><p>Reserve for events &amp; gatherings</p><a href="#" class="doc-link">Book Now →</a></div></div>
   </div>
   <div class="members-note reveal">🔒 Some documents are restricted to registered members only. Contact the secretary to register your access.</div>
 </section>

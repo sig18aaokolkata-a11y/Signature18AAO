@@ -4,6 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Signature 18 – Association of Apartment Owners, Kasba, Kolkata</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -43,23 +45,19 @@
       display:flex;align-items:center;justify-content:center;padding:68px 5% 50px;position:relative;text-align:center;
     }
     .hero-left{max-width:780px;animation:fadeUp 0.9s ease both;display:flex;flex-direction:column;align-items:center;}
-    .hero-tag{display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1.2rem;}
-    .hero-tag-line{width:40px;height:1px;background:var(--gold);}
-    .hero-tag span{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:500;}
-    .hero-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4.5rem);color:var(--white);line-height:1.08;margin-bottom:1rem;font-weight:400;}
+    .hero-left h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4.5rem);color:var(--white);line-height:1.08;margin-bottom:0.6rem;font-weight:400;}
     .hero-left h1 em{color:var(--gold);font-style:italic;display:block;font-size:1.15em;}
-    .hero-left h1 .sub{font-size:0.45em;letter-spacing:0.22em;text-transform:uppercase;font-family:'Outfit',sans-serif;font-weight:300;color:rgba(255,255,255,0.7);display:block;margin-top:0.4rem;}
-    .hero-divider{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;width:100%;}
     .hero-assoc{font-size:clamp(1.1rem,2.5vw,1.6rem);color:rgba(255,255,255,0.92);font-weight:300;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.2rem;}
+    .hero-divider{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;width:100%;}
     .hero-divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,162,51,0.5),transparent);}
     .hero-divider-diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
-    .hero-left p{color:rgba(255,255,255,0.8);font-size:0.95rem;line-height:1.9;font-weight:300;margin-bottom:2.5rem;max-width:500px;}
+    .hero-left p{color:rgba(255,255,255,0.85);font-size:0.95rem;line-height:1.9;font-weight:300;margin-bottom:2rem;max-width:500px;}
     .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
     .btn-gold{background:var(--gold);color:var(--navy);padding:0.85rem 2rem;border-radius:3px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:background 0.2s,transform 0.15s;}
     .btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);}
     .btn-ghost{border:2px solid rgba(255,255,255,0.6);color:var(--white);padding:0.85rem 2rem;border-radius:3px;text-decoration:none;font-weight:500;font-size:0.9rem;transition:border-color 0.2s,transform 0.15s;}
     .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
-    .hero-badge{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;gap:2px;}
+
     /* SECTIONS */
     section{padding:4rem 5%;}
     .section-label{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.7rem;}
@@ -76,12 +74,6 @@
     .amenity-item{display:flex;align-items:center;gap:0.7rem;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:0.65rem 1rem;font-size:0.85rem;font-weight:500;color:var(--navy);transition:border-color 0.2s,transform 0.15s;}
     .amenity-item:hover{border-color:var(--gold);transform:translateY(-2px);}
     .amenity-emoji{font-size:1.1rem;}
-    .about-stats{display:flex;align-items:center;max-width:1100px;background:var(--navy);border-radius:8px;overflow:hidden;}
-    .about-stat{flex:1;padding:1.8rem 2rem;text-align:center;}
-    .about-stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);line-height:1;font-weight:700;}
-    .about-stat-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.5);margin-top:0.3rem;}
-    .about-stat-divider{width:1px;height:50px;background:rgba(255,255,255,0.1);}
-    @media(max-width:768px){.about-layout{grid-template-columns:1fr;}.about-stats{flex-wrap:wrap;}.about-stat{min-width:50%;}.about-stat-divider{display:none;}}
 
     /* NOTICES */
     #news{background:var(--navy);}
@@ -98,11 +90,22 @@
     .notice-urgent::before{background:var(--red-accent);}
     .notice-badge{position:absolute;top:1rem;right:1rem;background:var(--red-accent);color:white;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;}
 
+    /* MEMBERS */
+    #members{background:var(--off-white);}
+    .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;max-width:1100px;margin-top:1.5rem;}
+    .doc-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.6rem;display:flex;flex-direction:column;gap:0.8rem;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;}
+    .doc-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(10,26,59,0.08);transform:translateY(-3px);}
+    .doc-icon-wrap{width:44px;height:44px;background:var(--gold-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+    .doc-card h4{font-size:0.92rem;font-weight:600;color:var(--navy);}
+    .doc-card p{font-size:0.8rem;color:var(--text-light);line-height:1.5;flex:1;}
+    .doc-link{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
+    .members-note{background:var(--navy);color:rgba(255,255,255,0.7);border-radius:4px;padding:0.8rem 1.2rem;font-size:0.82rem;display:flex;align-items:center;gap:0.6rem;margin-top:1rem;max-width:1100px;}
+
     /* EVENTS */
-    #events{background:var(--off-white);}
+    #events{background:var(--white);}
     .events-container{display:grid;grid-template-columns:2fr 1fr;gap:2rem;max-width:1100px;margin:1.5rem auto 0;align-items:start;}
     .events-list{display:flex;flex-direction:column;gap:0.8rem;}
-    .event-row{display:flex;align-items:center;gap:1.5rem;background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.2rem 1.5rem;transition:box-shadow 0.2s,border-color 0.2s;}
+    .event-row{display:flex;align-items:center;gap:1.5rem;background:var(--off-white);border:1px solid var(--border);border-radius:4px;padding:1.2rem 1.5rem;transition:box-shadow 0.2s,border-color 0.2s;}
     .event-row:hover{border-color:var(--gold);box-shadow:0 6px 20px rgba(10,26,59,0.08);}
     .ev-date{text-align:center;min-width:52px;}
     .ev-day{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--navy);line-height:1;font-weight:700;}
@@ -124,24 +127,13 @@
     .cal-day.empty{opacity:0;pointer-events:none;}
 
     /* GALLERY */
-    #gallery{background:var(--white);}
+    #gallery{background:var(--off-white);}
     .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:6px;margin-top:1.5rem;}
     .g-item{overflow:hidden;border-radius:3px;}
     .g-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s,filter 0.3s;filter:saturate(0.85);}
     .g-item:hover img{transform:scale(1.06);filter:saturate(1.1);}
     .g-item.wide{grid-column:span 2;}
     .g-item.tall{grid-row:span 2;}
-
-    /* MEMBERS */
-    #members{background:var(--off-white);}
-    .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;max-width:1100px;}
-    .doc-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.6rem;display:flex;flex-direction:column;gap:0.8rem;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;}
-    .doc-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(10,26,59,0.08);transform:translateY(-3px);}
-    .doc-icon-wrap{width:44px;height:44px;background:var(--gold-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
-    .doc-card h4{font-size:0.92rem;font-weight:600;color:var(--navy);}
-    .doc-card p{font-size:0.8rem;color:var(--text-light);line-height:1.5;flex:1;}
-    .doc-link{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
-    .members-note{background:var(--navy);color:rgba(255,255,255,0.7);border-radius:4px;padding:0.8rem 1.2rem;font-size:0.82rem;display:flex;align-items:center;gap:0.6rem;margin-top:1rem;max-width:1100px;}
 
     /* CONTACT */
     #contact{background:var(--white);}
@@ -165,7 +157,7 @@
     .footer-icon-btn:hover{color:var(--gold);}
     .fi-icon{width:28px;height:28px;background:rgba(201,162,51,0.15);border:1px solid rgba(201,162,51,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;}
     .footer-rera{margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.1);}
-    .rera-label{display:block;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.2rem;}
+    .rera-label{display:block;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.2rem;}
     .rera-id{font-size:0.75rem;color:rgba(255,255,255,0.45);}
     .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:1.2rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;font-size:0.78rem;color:rgba(255,255,255,0.35);}
 
@@ -174,7 +166,8 @@
     .reveal.visible{opacity:1;transform:translateY(0);}
 
     @media(max-width:900px){
-      .events-container{grid-template-columns:1fr;gap:2.5rem;}
+      .about-layout{grid-template-columns:1fr;}
+      .events-container{grid-template-columns:1fr;gap:2rem;}
       .gallery-grid{grid-template-columns:repeat(2,1fr);}
       .g-item.wide{grid-column:span 2;}
     }
@@ -211,9 +204,7 @@
 <!-- HERO -->
 <section id="home">
   <div class="hero-left">
-    <h1>
-      <em>Signature 18</em>
-    </h1>
+    <h1><em>Signature 18</em></h1>
     <div class="hero-assoc">Association of Apartment Owners</div>
     <div class="hero-divider">
       <div class="hero-divider-line"></div>
@@ -233,7 +224,6 @@
   <p class="section-label reveal">About Our Community</p>
   <h2 class="section-title reveal">A Premium Residential Community in Kasba</h2>
   <div class="gold-bar reveal"></div>
-
   <div class="about-layout reveal">
     <div class="about-text-block">
       <p>Signature 18 Association of Apartment Owners is the elected governing body of the 69-apartment tower at 8, Bosepukur Road, Kasba, Kolkata. We manage day-to-day operations, maintenance, community events, and the welfare of all residents.</p>
@@ -305,7 +295,7 @@
 <!-- MEMBERS -->
 <section id="members">
   <p class="section-label reveal">Residents Only</p>
-  <h2 class="section-title reveal">Members Section</h2>
+  <h2 class="section-title reveal">For Members</h2>
   <div class="gold-bar reveal"></div>
   <p class="section-sub reveal">Access society documents, meeting records, and important information.</p>
   <div class="members-grid">
@@ -318,6 +308,7 @@
     <div class="doc-card reveal"><div class="doc-icon-wrap">💳</div><h4>Pay Maintenance</h4><p>Bank details and UPI ID for dues payment</p><a href="#" class="doc-link">View →</a></div>
     <div class="doc-card reveal"><div class="doc-icon-wrap">📝</div><h4>Contact the Association</h4><p>Submit complaints, requests or queries to the committee</p><a href="#contact" class="doc-link">Contact Us →</a></div>
     <div class="doc-card reveal"><div class="doc-icon-wrap">👥</div><h4>Residents List</h4><p>Directory of all apartment owners and residents</p><a href="#" class="doc-link">Open →</a></div>
+    <div class="doc-card reveal"><div class="doc-icon-wrap">🏛️</div><h4>Community Hall Booking</h4><p>Reserve the community hall for events and gatherings</p><a href="#" class="doc-link">Book Now →</a></div>
   </div>
   <div class="members-note reveal">🔒 Some documents are restricted to registered members only. Contact the secretary to register your access.</div>
 </section>
@@ -370,7 +361,7 @@
         <div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div>
         <div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
       </div>
-      <div style="margin-top:1.2rem;font-size:0.75rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:0.5rem;">
+      <div style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:0.5rem;">
         <span style="width:10px;height:10px;background:rgba(201,162,51,0.25);border-radius:2px;display:inline-block;"></span> Event day
       </div>
     </div>

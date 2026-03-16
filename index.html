@@ -21,12 +21,7 @@
 
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,26,59,0.97);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;border-bottom:2px solid var(--gold);}
-    .nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
-    .nav-logo-icon{width:52px;height:38px;background:var(--gold);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 6px;}
-    .nav-logo-icon .logo-s18{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--navy);line-height:1;}
-    .nav-logo-icon .logo-aao{font-size:0.45rem;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0.18em;color:var(--navy-mid);line-height:1;margin-top:2px;}
-    .nav-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--white);line-height:1.2;}
-    .nav-logo-text span{display:block;font-size:0.6rem;font-family:'Outfit',sans-serif;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:400;}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
     .nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center;}
     .nav-links a{text-decoration:none;color:rgba(255,255,255,0.75);font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:500;transition:color 0.2s;}
     .nav-links a:hover{color:var(--gold);}
@@ -36,15 +31,9 @@
     .hamburger span{width:26px;height:2px;background:var(--gold);display:block;}
 
     /* HERO */
-    #home{
-      min-height:100vh;
-      background-color:var(--navy-mid);
-      background-image:linear-gradient(135deg,rgba(10,26,59,0.78) 0%,rgba(17,35,84,0.68) 100%),url('building.png');
-      background-size:cover;background-position:center;
-      display:flex;align-items:center;justify-content:center;padding:68px 5% 50px;position:relative;text-align:center;
-    }
+    #home{min-height:100vh;background-color:var(--navy-mid);background-image:linear-gradient(135deg,rgba(10,26,59,0.78) 0%,rgba(17,35,84,0.68) 100%),url('building.png');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;padding:68px 5% 50px;position:relative;text-align:center;}
     .hero-left{max-width:780px;animation:fadeUp 0.9s ease both;display:flex;flex-direction:column;align-items:center;}
-    .hero-logo{width:180px;height:auto;margin-bottom:1.2rem;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.5));}
+    .hero-logo{width:200px;height:auto;margin-bottom:1.2rem;filter:drop-shadow(0 4px 24px rgba(0,0,0,0.5));}
     .hero-assoc{font-size:clamp(1.1rem,2.5vw,1.6rem);color:rgba(255,255,255,0.92);font-weight:300;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.2rem;}
     .hero-divider{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;width:100%;}
     .hero-divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,162,51,0.5),transparent);}
@@ -138,13 +127,28 @@
     #committee{background:var(--navy);}
     #committee .section-title{color:var(--white);}
     .committee-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.5rem;max-width:1100px;width:100%;margin-top:2rem;justify-items:center;}
-    .committee-card{background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,51,0.2);border-radius:8px;padding:1.8rem 1.2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.8rem;transition:background 0.2s,transform 0.2s;}
-    .committee-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px);}
+    .committee-card{background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,51,0.2);border-radius:8px;padding:1.8rem 1.2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.8rem;transition:background 0.2s,transform 0.2s,border-color 0.2s;width:100%;cursor:pointer;}
+    .committee-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px);border-color:var(--gold);}
     .committee-avatar{width:80px;height:80px;border-radius:50%;background:rgba(201,162,51,0.12);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:2rem;overflow:hidden;flex-shrink:0;}
     .committee-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
     .committee-info h4{font-size:0.95rem;font-weight:600;color:var(--white);}
     .committee-role{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-top:0.2rem;}
     .committee-phone{font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:0.3rem;}
+    .committee-hint{font-size:0.68rem;color:rgba(255,255,255,0.3);margin-top:0.4rem;letter-spacing:0.05em;}
+
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(5,12,30,0.8);backdrop-filter:blur(6px);z-index:500;align-items:center;justify-content:center;padding:2rem;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:var(--navy-mid);border:1px solid rgba(201,162,51,0.35);border-radius:12px;padding:2rem;max-width:380px;width:100%;position:relative;animation:fadeUp 0.2s ease;}
+    .modal-close{position:absolute;top:0.9rem;right:1rem;background:none;border:none;color:rgba(255,255,255,0.4);font-size:1.3rem;cursor:pointer;line-height:1;transition:color 0.2s;}
+    .modal-close:hover{color:var(--gold);}
+    .modal-avatar{width:80px;height:80px;border-radius:50%;background:rgba(201,162,51,0.12);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1rem;overflow:hidden;}
+    .modal-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+    .modal-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--white);text-align:center;}
+    .modal-role{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);text-align:center;margin-top:0.2rem;margin-bottom:0.4rem;}
+    .modal-phone{font-size:0.82rem;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:1.2rem;}
+    .modal-divider{width:40px;height:1px;background:rgba(201,162,51,0.3);margin:0.8rem auto;}
+    .modal-bio{font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.8;text-align:center;font-weight:300;}
 
     /* CONTACT */
     #contact{background:var(--white);}
@@ -176,21 +180,8 @@
     .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease;}
     .reveal.visible{opacity:1;transform:translateY(0);}
 
-    @media(max-width:900px){
-      .about-layout{grid-template-columns:1fr;}
-      .events-container{grid-template-columns:1fr;gap:2rem;}
-      .gallery-grid{grid-template-columns:repeat(2,1fr);}
-      .g-item.wide{grid-column:span 2;}
-    }
-    @media(max-width:768px){
-      .nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--navy);padding:1.2rem 5%;border-top:1px solid rgba(201,162,51,0.3);gap:1rem;}
-      .nav-links.open{display:flex;}
-      .hamburger{display:flex;}
-      .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
-      .members-grid{grid-template-columns:repeat(2,1fr);}
-      .committee-grid{grid-template-columns:repeat(2,1fr);}
-      .hero-logo{width:140px;}
-    }
+    @media(max-width:900px){.about-layout{grid-template-columns:1fr;}.events-container{grid-template-columns:1fr;gap:2rem;}.gallery-grid{grid-template-columns:repeat(2,1fr);}.g-item.wide{grid-column:span 2;}}
+    @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:68px;left:0;right:0;background:var(--navy);padding:1.2rem 5%;border-top:1px solid rgba(201,162,51,0.3);gap:1rem;}.nav-links.open{display:flex;}.hamburger{display:flex;}.gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}.members-grid{grid-template-columns:repeat(2,1fr);}.committee-grid{grid-template-columns:repeat(2,1fr);}.hero-logo{width:150px;}}
   </style>
 </head>
 <body>
@@ -198,10 +189,11 @@
 <!-- NAV -->
 <nav>
   <a href="#home" class="nav-logo">
-    <div class="nav-logo-icon">
-      <img src="AAO_Logo.png" alt="Signature 18 Association" style="height:42px;">
+    <img src="logo.png" alt="Signature 18" style="height:50px;width:auto;border-radius:4px;"/>
+    <div style="display:flex;flex-direction:column;margin-left:0.75rem;">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--white);line-height:1.2;">Signature 18</span>
+      <span style="font-size:0.58rem;font-family:'Outfit',sans-serif;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:400;">Association of Apartment Owners</span>
     </div>
-    <div class="nav-logo-text">Signature 18 <span>Association of Apartment Owners</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
@@ -218,7 +210,7 @@
 <!-- HERO -->
 <section id="home">
   <div class="hero-left">
-    <img src="logo.png" alt="Signature 18" class="hero-logo"/>
+    <img src="logo2.png" alt="Signature 18" class="hero-logo"/>
     <div class="hero-assoc">Association of Apartment Owners</div>
     <div class="hero-divider">
       <div class="hero-divider-line"></div>
@@ -266,43 +258,12 @@
   <div class="gold-bar reveal"></div>
   <p class="section-sub reveal" style="color:rgba(255,255,255,0.6);">Important announcements and updates from the Association.</p>
   <div class="notice-grid">
-    <div class="notice-card notice-urgent reveal">
-      <div class="notice-badge">Urgent</div>
-      <p class="notice-type">⚠️ Maintenance</p>
-      <h3>Water Supply Interruption – Tank Cleaning</h3>
-      <p>Overhead water tank cleaning is scheduled for 28th March. Water supply will be interrupted from 9:00 AM to 1:00 PM. Kindly store water in advance.</p>
-      <p class="notice-date">📅 Posted: March 10, 2026</p>
-    </div>
-    <div class="notice-card reveal">
-      <p class="notice-type">📋 AGM Notice</p>
-      <h3>Annual General Meeting – April 12, 2026</h3>
-      <p>All resident members are invited to attend the AGM at the Community Hall, Ground Floor at 6:00 PM. Agenda: accounts review and committee elections.</p>
-      <p class="notice-date">📅 Posted: March 5, 2026</p>
-    </div>
-    <div class="notice-card reveal">
-      <p class="notice-type">💰 Finance</p>
-      <h3>Maintenance Dues – Q1 2026 Reminder</h3>
-      <p>Kindly clear all pending maintenance dues for Q1 2026 by March 31st to avoid late fees. Contact the secretary for payment details.</p>
-      <p class="notice-date">📅 Posted: March 1, 2026</p>
-    </div>
-    <div class="notice-card reveal">
-      <p class="notice-type">🌿 Community</p>
-      <h3>Terrace Garden Initiative – Join Us!</h3>
-      <p>We are launching a resident-managed terrace garden. Register to adopt a plant bed. Planting day is May 1st — limited spots available!</p>
-      <p class="notice-date">📅 Posted: February 20, 2026</p>
-    </div>
-    <div class="notice-card reveal">
-      <p class="notice-type">🔒 Security</p>
-      <h3>Updated Visitor Entry Protocol</h3>
-      <p>Effective April 1st, all visitors must register via the intercom system. Please inform the security desk in advance for guests.</p>
-      <p class="notice-date">📅 Posted: February 15, 2026</p>
-    </div>
-    <div class="notice-card reveal">
-      <p class="notice-type">📜 Circular</p>
-      <h3>Pet Policy Reminder</h3>
-      <p>All residents with pets are reminded to ensure pets are leashed in common areas and lifts. Full policy available in the Members section.</p>
-      <p class="notice-date">📅 Posted: February 10, 2026</p>
-    </div>
+    <div class="notice-card notice-urgent reveal"><div class="notice-badge">Urgent</div><p class="notice-type">⚠️ Maintenance</p><h3>Water Supply Interruption – Tank Cleaning</h3><p>Overhead water tank cleaning is scheduled for 28th March. Water supply will be interrupted from 9:00 AM to 1:00 PM. Kindly store water in advance.</p><p class="notice-date">📅 Posted: March 10, 2026</p></div>
+    <div class="notice-card reveal"><p class="notice-type">📋 AGM Notice</p><h3>Annual General Meeting – April 12, 2026</h3><p>All resident members are invited to attend the AGM at the Community Hall, Ground Floor at 6:00 PM. Agenda: accounts review and committee elections.</p><p class="notice-date">📅 Posted: March 5, 2026</p></div>
+    <div class="notice-card reveal"><p class="notice-type">💰 Finance</p><h3>Maintenance Dues – Q1 2026 Reminder</h3><p>Kindly clear all pending maintenance dues for Q1 2026 by March 31st to avoid late fees. Contact the secretary for payment details.</p><p class="notice-date">📅 Posted: March 1, 2026</p></div>
+    <div class="notice-card reveal"><p class="notice-type">🌿 Community</p><h3>Terrace Garden Initiative – Join Us!</h3><p>We are launching a resident-managed terrace garden. Register to adopt a plant bed. Planting day is May 1st — limited spots available!</p><p class="notice-date">📅 Posted: February 20, 2026</p></div>
+    <div class="notice-card reveal"><p class="notice-type">🔒 Security</p><h3>Updated Visitor Entry Protocol</h3><p>Effective April 1st, all visitors must register via the intercom system. Please inform the security desk in advance for guests.</p><p class="notice-date">📅 Posted: February 15, 2026</p></div>
+    <div class="notice-card reveal"><p class="notice-type">📜 Circular</p><h3>Pet Policy Reminder</h3><p>All residents with pets are reminded to ensure pets are leashed in common areas and lifts. Full policy available in the Members section.</p><p class="notice-date">📅 Posted: February 10, 2026</p></div>
   </div>
 </section>
 
@@ -333,36 +294,11 @@
   <div class="gold-bar reveal"></div>
   <div class="events-container">
     <div class="events-list">
-      <div class="event-row reveal">
-        <div class="ev-date"><div class="ev-day">28</div><div class="ev-mon">Mar</div></div>
-        <div class="ev-divider"></div>
-        <div class="ev-info"><h4>Water Tank Cleaning</h4><p>9:00 AM – 1:00 PM · Building-wide</p></div>
-        <span class="ev-tag tag-maint">Maintenance</span>
-      </div>
-      <div class="event-row reveal">
-        <div class="ev-date"><div class="ev-day">12</div><div class="ev-mon">Apr</div></div>
-        <div class="ev-divider"></div>
-        <div class="ev-info"><h4>Annual General Meeting (AGM)</h4><p>6:00 PM · Community Hall, Ground Floor</p></div>
-        <span class="ev-tag tag-meeting">Meeting</span>
-      </div>
-      <div class="event-row reveal">
-        <div class="ev-date"><div class="ev-day">14</div><div class="ev-mon">Apr</div></div>
-        <div class="ev-divider"></div>
-        <div class="ev-info"><h4>Pohela Boishakh Celebration 🎉</h4><p>5:00 PM onwards · Rooftop &amp; Common Area</p></div>
-        <span class="ev-tag tag-festival">Festival</span>
-      </div>
-      <div class="event-row reveal">
-        <div class="ev-date"><div class="ev-day">01</div><div class="ev-mon">May</div></div>
-        <div class="ev-divider"></div>
-        <div class="ev-info"><h4>Terrace Garden Planting Day 🌱</h4><p>8:00 AM – 11:00 AM · Rooftop Terrace</p></div>
-        <span class="ev-tag tag-social">Community</span>
-      </div>
-      <div class="event-row reveal">
-        <div class="ev-date"><div class="ev-day">20</div><div class="ev-mon">May</div></div>
-        <div class="ev-divider"></div>
-        <div class="ev-info"><h4>Pool Season Opening Day 🏊</h4><p>10:00 AM · Rooftop Pool</p></div>
-        <span class="ev-tag tag-social">Community</span>
-      </div>
+      <div class="event-row reveal"><div class="ev-date"><div class="ev-day">28</div><div class="ev-mon">Mar</div></div><div class="ev-divider"></div><div class="ev-info"><h4>Water Tank Cleaning</h4><p>9:00 AM – 1:00 PM · Building-wide</p></div><span class="ev-tag tag-maint">Maintenance</span></div>
+      <div class="event-row reveal"><div class="ev-date"><div class="ev-day">12</div><div class="ev-mon">Apr</div></div><div class="ev-divider"></div><div class="ev-info"><h4>Annual General Meeting (AGM)</h4><p>6:00 PM · Community Hall, Ground Floor</p></div><span class="ev-tag tag-meeting">Meeting</span></div>
+      <div class="event-row reveal"><div class="ev-date"><div class="ev-day">14</div><div class="ev-mon">Apr</div></div><div class="ev-divider"></div><div class="ev-info"><h4>Pohela Boishakh Celebration 🎉</h4><p>5:00 PM onwards · Rooftop &amp; Common Area</p></div><span class="ev-tag tag-festival">Festival</span></div>
+      <div class="event-row reveal"><div class="ev-date"><div class="ev-day">01</div><div class="ev-mon">May</div></div><div class="ev-divider"></div><div class="ev-info"><h4>Terrace Garden Planting Day 🌱</h4><p>8:00 AM – 11:00 AM · Rooftop Terrace</p></div><span class="ev-tag tag-social">Community</span></div>
+      <div class="event-row reveal"><div class="ev-date"><div class="ev-day">20</div><div class="ev-mon">May</div></div><div class="ev-divider"></div><div class="ev-info"><h4>Pool Season Opening Day 🏊</h4><p>10:00 AM · Rooftop Pool</p></div><span class="ev-tag tag-social">Community</span></div>
     </div>
     <div class="mini-cal reveal">
       <h4>📅 April 2026</h4>
@@ -374,9 +310,7 @@
         <div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div>
         <div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
       </div>
-      <div style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:0.5rem;">
-        <span style="width:10px;height:10px;background:rgba(201,162,51,0.25);border-radius:2px;display:inline-block;"></span> Event day
-      </div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:0.5rem;"><span style="width:10px;height:10px;background:rgba(201,162,51,0.25);border-radius:2px;display:inline-block;"></span> Event day</div>
     </div>
   </div>
 </section>
@@ -400,19 +334,68 @@
 <section id="committee">
   <h2 class="section-title reveal" style="color:var(--white);">Working Committee</h2>
   <div class="gold-bar reveal"></div>
-  <p class="section-sub reveal" style="color:rgba(255,255,255,0.6);">Your elected representatives for 2025–26.</p>
+  <p class="section-sub reveal" style="color:rgba(255,255,255,0.6);">Your elected representatives for 2025–26. Tap a card to learn more.</p>
   <div class="committee-grid">
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">President</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Secretary</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Treasurer</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Vice President</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
-    <div class="committee-card reveal"><div class="committee-avatar">👤</div><div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div></div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','President','📞 +91 98300 00000','Responsible for overall governance, chairing AGMs, and representing the association in all official matters.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">President</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Secretary','📞 +91 98300 00000','Manages day-to-day correspondence, meeting minutes, and official records of the association.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Secretary</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Treasurer','📞 +91 98300 00000','Oversees all financial matters including maintenance collections, budgeting, and financial reporting.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Treasurer</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Vice President','📞 +91 98300 00000','Assists the President and steps in during their absence. Leads key community initiatives and resident engagement.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Vice President</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Member','📞 +91 98300 00000','Active committee member contributing to community decisions and resident welfare.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Member','📞 +91 98300 00000','Active committee member contributing to community decisions and resident welfare.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Member','📞 +91 98300 00000','Active committee member contributing to community decisions and resident welfare.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Member','📞 +91 98300 00000','Active committee member contributing to community decisions and resident welfare.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
+    <div class="committee-card reveal" onclick="openModal('Update Name','Member','📞 +91 98300 00000','Active committee member contributing to community decisions and resident welfare.')">
+      <div class="committee-avatar">👤</div>
+      <div class="committee-info"><h4>Update Name</h4><p class="committee-role">Member</p><p class="committee-phone">📞 +91 98300 00000</p></div>
+      <p class="committee-hint">Tap for profile</p>
+    </div>
   </div>
 </section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-avatar" id="modalAvatar">👤</div>
+    <div class="modal-name" id="modalName"></div>
+    <div class="modal-role" id="modalRole"></div>
+    <div class="modal-phone" id="modalPhone"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-bio" id="modalBio"></div>
+  </div>
+</div>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -421,22 +404,10 @@
   <div class="gold-bar reveal"></div>
   <div class="contact-card reveal">
     <h3>Association Details</h3>
-    <div class="c-detail">
-      <div class="c-icon">📍</div>
-      <div><h4>Address</h4><p>8, Bosepukur Road, Kasba<br/>Kolkata – 700042, West Bengal</p></div>
-    </div>
-    <div class="c-detail">
-      <div class="c-icon">📧</div>
-      <div><h4>Email</h4><p>association@signature18kasba.in</p></div>
-    </div>
-    <div class="c-detail">
-      <div class="c-icon">📞</div>
-      <div><h4>Facility Manager Contact</h4><p>+91 98300 00000</p></div>
-    </div>
-    <div class="c-detail">
-      <div class="c-icon">🕐</div>
-      <div><h4>Office Hours</h4><p>Mon – Sat: 10:00 AM – 7:00 PM</p></div>
-    </div>
+    <div class="c-detail"><div class="c-icon">📍</div><div><h4>Address</h4><p>8, Bosepukur Road, Kasba<br/>Kolkata – 700042, West Bengal</p></div></div>
+    <div class="c-detail"><div class="c-icon">📧</div><div><h4>Email</h4><p>association@signature18kasba.in</p></div></div>
+    <div class="c-detail"><div class="c-icon">📞</div><div><h4>Facility Manager Contact</h4><p>+91 98300 00000</p></div></div>
+    <div class="c-detail"><div class="c-icon">🕐</div><div><h4>Office Hours</h4><p>Mon – Sat: 10:00 AM – 7:00 PM</p></div></div>
   </div>
 </section>
 
@@ -445,11 +416,11 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div style="display:flex;align-items:center;gap:0.75rem;">
-        <div style="width:52px;height:38px;background:var(--gold);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3px 6px;">
-          <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--navy);line-height:1;">S·18</span>
-          <span style="font-size:0.45rem;font-family:'Outfit',sans-serif;font-weight:700;letter-spacing:0.18em;color:var(--navy-mid);line-height:1;margin-top:2px;">AAO</span>
+        <img src="logo.png" alt="Signature 18" style="height:60px;width:auto;border-radius:4px;"/>
+        <div style="display:flex;flex-direction:column;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);line-height:1.2;">Signature 18</span>
+          <span style="font-size:0.6rem;font-family:'Outfit',sans-serif;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);font-weight:400;">Association of Apartment Owners</span>
         </div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:white;line-height:1.2;">Signature 18<span style="display:block;font-size:0.6rem;font-family:'Outfit',sans-serif;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:400;">Association of Apartment Owners</span></div>
       </div>
       <p>The official association at 8, Bosepukur Road, Kasba, Kolkata. Together we build a better community.</p>
     </div>
@@ -477,14 +448,8 @@
     <div class="footer-col">
       <h5>Explore</h5>
       <div class="footer-icons">
-        <a href="https://www.youtube.com/watch?v=_l8ESQoyBrs" target="_blank" class="footer-icon-btn">
-          <span class="fi-icon">▶</span>
-          <span>Building Tour</span>
-        </a>
-        <a href="https://maps.google.com/?q=8+Bosepukur+Road+Kasba+Kolkata+700042" target="_blank" class="footer-icon-btn">
-          <span class="fi-icon">📍</span>
-          <span>View on Map</span>
-        </a>
+        <a href="https://www.youtube.com/watch?v=_l8ESQoyBrs" target="_blank" class="footer-icon-btn"><span class="fi-icon">▶</span><span>Building Tour</span></a>
+        <a href="https://maps.google.com/?q=8+Bosepukur+Road+Kasba+Kolkata+700042" target="_blank" class="footer-icon-btn"><span class="fi-icon">📍</span><span>View on Map</span></a>
         <div class="footer-rera">
           <span class="rera-label">Association Registration No.</span>
           <span class="rera-id">HIRA/P/KOL/2021/001245</span>
@@ -498,6 +463,23 @@
 </footer>
 
 <script>
+  function openModal(name, role, phone, bio) {
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalRole').textContent = role;
+    document.getElementById('modalPhone').textContent = phone;
+    document.getElementById('modalBio').textContent = bio;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
   document.getElementById('hamburger').addEventListener('click',()=>{
     document.getElementById('navLinks').classList.toggle('open');
   });

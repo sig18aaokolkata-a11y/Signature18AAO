@@ -552,7 +552,80 @@
       <div class="book-body">
         <p class="book-sec">Resident Details</p>
         <div class="book-row">
-          <div class="bf"><label>Flat Number *</label><input type="text" id="bFlat" placeholder="e.g. 10A"/></div>
+          <div class="bf"><label>Flat Number *</label>
+            <select id="bFlat">
+              <option value="">Select flat…</option>
+              <option value='1B'>1B</option>
+              <option value='1C'>1C</option>
+              <option value='2B'>2B</option>
+              <option value='2C'>2C</option>
+              <option value='2D'>2D</option>
+              <option value='3A'>3A</option>
+              <option value='3B'>3B</option>
+              <option value='3C'>3C</option>
+              <option value='3D'>3D</option>
+              <option value='4A'>4A</option>
+              <option value='4B'>4B</option>
+              <option value='4C'>4C</option>
+              <option value='4D'>4D</option>
+              <option value='5A'>5A</option>
+              <option value='5B'>5B</option>
+              <option value='5C'>5C</option>
+              <option value='5D'>5D</option>
+              <option value='6A'>6A</option>
+              <option value='6B'>6B</option>
+              <option value='6C'>6C</option>
+              <option value='6D'>6D</option>
+              <option value='7A'>7A</option>
+              <option value='7B'>7B</option>
+              <option value='7C'>7C</option>
+              <option value='7D'>7D</option>
+              <option value='8A'>8A</option>
+              <option value='8B'>8B</option>
+              <option value='8C'>8C</option>
+              <option value='8D'>8D</option>
+              <option value='9A'>9A</option>
+              <option value='9B'>9B</option>
+              <option value='9C'>9C</option>
+              <option value='9D'>9D</option>
+              <option value='10A'>10A</option>
+              <option value='10B'>10B</option>
+              <option value='10C'>10C</option>
+              <option value='10D'>10D</option>
+              <option value='11A'>11A</option>
+              <option value='11B'>11B</option>
+              <option value='11C'>11C</option>
+              <option value='11D'>11D</option>
+              <option value='12A'>12A</option>
+              <option value='12B'>12B</option>
+              <option value='12C'>12C</option>
+              <option value='12D'>12D</option>
+              <option value='13A'>13A</option>
+              <option value='13B'>13B</option>
+              <option value='13C'>13C</option>
+              <option value='13D'>13D</option>
+              <option value='14A'>14A</option>
+              <option value='14B'>14B</option>
+              <option value='14C'>14C</option>
+              <option value='14D'>14D</option>
+              <option value='15A'>15A</option>
+              <option value='15B'>15B</option>
+              <option value='15C'>15C</option>
+              <option value='15D'>15D</option>
+              <option value='16A'>16A</option>
+              <option value='16B'>16B</option>
+              <option value='16C'>16C</option>
+              <option value='16D'>16D</option>
+              <option value='17A'>17A</option>
+              <option value='17B'>17B</option>
+              <option value='17C'>17C</option>
+              <option value='17D'>17D</option>
+              <option value='18A'>18A</option>
+              <option value='18B'>18B</option>
+              <option value='18C'>18C</option>
+              <option value='18D'>18D</option>
+            </select>
+          </div>
           <div class="bf"><label>Owner Name *</label><input type="text" id="bName" placeholder="Full name"/></div>
         </div>
         <div class="book-row">
@@ -606,7 +679,7 @@
   <div class="bar fade-up"></div>
   <div class="con-card fade-up">
     <div class="c-row"><div class="c-ic">📍</div><div><h4>Address</h4><p>8, Bosepukur Road, Kasba<br/>Kolkata – 700042, West Bengal</p></div></div>
-       <div class="c-row"><div class="c-ic">📧</div><div><h4>Association Email</h4><p>sig18aaokolkata@gmail.com</p></div></div>
+    <div class="c-row"><div class="c-ic">📧</div><div><h4>Association Email</h4><p>sig18aaokolkata@gmail.com</p></div></div>
     <div class="c-row"><div class="c-ic">🗂️</div><div><h4>Facility Manager Email</h4><p>fm.signature18@gmail.com</p></div></div>
     <div class="c-row"><div class="c-ic">📞</div><div><h4>Facility Manager Contact</h4><p>+91 7980412140</p></div></div>
     <div class="c-row"><div class="c-ic">🕐</div><div><h4>Office Hours</h4><p>Tue – Sun: 9:00 AM – 6:00 PM (Monday Off)</p></div></div>
@@ -782,7 +855,7 @@ const RESIDENTS=[
     document.getElementById('bStatus').textContent='';
     document.getElementById('bSubmitBtn').disabled=false;
     document.getElementById('bAccept').checked=false;
-    ['bFlat','bName','bPhone','bEmail','bDate','bStart','bEnd','bGuests','bParking','bNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+    ['bName','bPhone','bEmail','bDate','bStart','bEnd','bGuests','bParking','bNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';}); document.getElementById('bFlat').value='';
     document.getElementById('bType').value='';
     document.getElementById('bBookedNote').style.display='none';
     document.body.style.overflow='hidden';
@@ -802,6 +875,16 @@ const RESIDENTS=[
      }));
      safe('qryOv',el=>el.addEventListener('click',e=>{if(e.target===el)closeQuery();}));
      safe('payOv',el=>el.addEventListener('click',e=>{if(e.target===el)closePay();}));
+     safe('bFlat',el=>el.addEventListener('change',function(){
+       const r=RESIDENTS.find(x=>x.flat===this.value);
+       if(r){
+         document.getElementById('bName').value=r.name;
+         document.getElementById('bEmail').value=r.email;
+         document.getElementById('bPhone').value=r.phone;
+       }else{
+         ['bName','bEmail','bPhone'].forEach(id=>{document.getElementById(id).value='';});
+       }
+     }));
      safe('qFlat',el=>el.addEventListener('change',function(){
        const r=RESIDENTS.find(x=>x.flat===this.value);
        if(r){

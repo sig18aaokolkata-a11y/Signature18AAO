@@ -7,11 +7,36 @@
   <link rel="icon" href="favicon.ico"/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <style>
     :root{--navy:#0a1a3b;--navy-mid:#112354;--gold:#c9a233;--gold-light:#e8c35a;--gold-pale:#f5e9c0;--off-white:#f8f6f0;--text-light:#7a8aaa;--border:#d6deee;--red:#c0392b;}
     *{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
     body{font-family:'Outfit',sans-serif;background:#fff;color:#0a1a3b;overflow-x:hidden;}
+
+
+    /* ── LOGIN SCREEN ── */
+    #loginScreen{display:flex;position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#0a1a3b 0%,#112354 100%);flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2rem;text-align:center;transition:opacity 0.4s;}
+    #loginScreen.hide{opacity:0;pointer-events:none;}
+    .ls-logo{width:120px;height:auto;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.4));}
+    .ls-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.5rem);color:#fff;line-height:1.2;}
+    .ls-sub{font-size:0.88rem;color:rgba(255,255,255,0.55);max-width:320px;line-height:1.7;}
+    .ls-divider{width:40px;height:1px;background:rgba(201,162,51,0.4);}
+    .g-btn{display:flex;align-items:center;gap:0.75rem;background:#fff;color:#333;border:none;border-radius:8px;padding:0.85rem 1.8rem;font-size:0.95rem;font-family:'Outfit',sans-serif;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:box-shadow 0.2s,transform 0.15s;}
+    .g-btn:hover{box-shadow:0 6px 24px rgba(0,0,0,0.4);transform:translateY(-2px);}
+    .g-btn svg{width:22px;height:22px;flex-shrink:0;}
+    .ls-note{font-size:0.72rem;color:rgba(255,255,255,0.3);max-width:280px;line-height:1.6;}
+    .ls-err{background:rgba(192,57,43,0.2);border:1px solid rgba(192,57,43,0.4);border-radius:6px;padding:0.7rem 1.2rem;font-size:0.82rem;color:#e74c3c;max-width:320px;display:none;}
+    .ls-err.show{display:block;}
+    .ls-loading{font-size:0.82rem;color:rgba(255,255,255,0.45);display:none;}
+    .ls-loading.show{display:block;}
+    /* nav user area */
+    .nav-user{display:flex;align-items:center;gap:0.5rem;}
+    .nav-user-name{font-size:0.72rem;color:rgba(255,255,255,0.7);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .nav-user-photo{width:28px;height:28px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;}
+    .nav-signout{background:none;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.6);border-radius:3px;padding:0.22rem 0.55rem;font-size:0.68rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.2s;margin-left:0.2rem;}
+    .nav-signout:hover{border-color:var(--gold);color:var(--gold);}
 
     /* WIP */
     .wip{background:rgba(10,26,59,0.97);border-bottom:1px solid rgba(192,57,43,0.4);padding:0.32rem 5%;display:flex;align-items:center;justify-content:center;gap:0.6rem;font-size:0.7rem;color:rgba(255,255,255,0.55);letter-spacing:0.06em;position:fixed;top:0;left:0;right:0;z-index:201;}
@@ -360,6 +385,20 @@
 </head>
 <body>
 
+<div id="loginScreen">
+  <img src="logo2.png" alt="Signature 18" class="ls-logo"/>
+  <div class="ls-title">Signature 18<br/>Resident Portal</div>
+  <div class="ls-divider"></div>
+  <div class="ls-sub">Sign in with your registered Google account to access the community portal.</div>
+  <button class="g-btn" id="gSignInBtn" onclick="doSignIn()">
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+    Sign in with Google
+  </button>
+  <div class="ls-err" id="lsErr"></div>
+  <div class="ls-loading" id="lsLoading">Verifying your account&hellip;</div>
+  <div class="ls-note">Access is restricted to registered Signature 18 residents only.<br/>Contact the Association if you need help.</div>
+</div>
+
 <div class="wip"><span class="wip-dot"></span><span>Website under development — content may change</span></div>
 
 <nav>
@@ -373,6 +412,7 @@
     <li><a href="#gallery">Gallery</a></li><li><a href="#committee">Working Committee</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
+  <div id="navUserArea"></div>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 
@@ -679,8 +719,8 @@
   <div class="bar fade-up"></div>
   <div class="con-card fade-up">
     <div class="c-row"><div class="c-ic">📍</div><div><h4>Address</h4><p>8, Bosepukur Road, Kasba<br/>Kolkata – 700042, West Bengal</p></div></div>
-    <div class="c-row"><div class="c-ic">📧</div><div><h4>Association Email</h4><p>sig18aaokolkata@gmail.com</p></div></div>
-    <div class="c-row"><div class="c-ic">🗂️</div><div><h4>Facility Manager Email</h4><p>fm.signature18@gmail.com</p></div></div>
+    <div class="c-row"><div class="c-ic">📧</div><div><h4>Association Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="addec4ca9c95ccccc2c6c2c1c6ccd9ccedcac0ccc4c183cec2c0">[email&#160;protected]</a></p></div></div>
+    <div class="c-row"><div class="c-ic">🗂️</div><div><h4>Facility Manager Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="88eee5a6fbe1efe6e9fcfdfaedb9b0c8efe5e9e1e4a6ebe7e5">[email&#160;protected]</a></p></div></div>
     <div class="c-row"><div class="c-ic">📞</div><div><h4>Facility Manager Contact</h4><p>+91 7980412140</p></div></div>
     <div class="c-row"><div class="c-ic">🕐</div><div><h4>Office Hours</h4><p>Tue – Sun: 9:00 AM – 6:00 PM (Monday Off)</p></div></div>
   </div>
@@ -719,7 +759,7 @@
   <div class="ft-bot"><span>© 2026 Signature 18 Association of Apartment Owners, Kasba, Kolkata. All rights reserved.</span><span class="vtag">v1.0</span></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const RESIDENTS=[
   {flat:'1B',name:'SMT. SWETA BANERJEE',phone:'9830299966',email:'indranil5673@gmail.com',parking:''},
   {flat:'1C',name:'SRI SANJOY SARKAR & SMT. SOMA SARKAR',phone:'9830917643/9432211300',email:'sanjoysarkar02@gmail.com',parking:''},
@@ -1051,6 +1091,139 @@ const RESIDENTS=[
     }
   }
 
+
+  // ── FIREBASE AUTH ──
+  // ⚙️ SETUP: console.firebase.google.com → New project → Add Web App → copy config
+  // Enable: Authentication → Sign-in method → Google
+  // Add your GitHub Pages URL to: Authentication → Settings → Authorised domains
+  const FIREBASE_CONFIG = {
+    apiKey:            "AIzaSyCLLBoz7omO26827Zonb9RKLC9ovBU1MOU",
+    authDomain:        "signature18-fcc5c.firebaseapp.com",
+    projectId:         "signature18-fcc5c",
+    storageBucket:     "signature18-fcc5c.firebasestorage.app",
+    messagingSenderId: "1043699444207",
+    appId:             "1:1043699444207:web:890298821572a2eb6b2e1a"
+  };
+
+  const ALLOWED = new Set([
+    'a_pramanick@rediffmail.com',
+    'abhra.mukhopadhyay@gmail.com',
+    'adreeja.acharyya@gmail.com',
+    'arnab.nandan@tatamotors.com',
+    'arpanpaul999@gmail.com',
+    'bhattacharya.sukanta@gmail.com',
+    'bibhuscanner@gmail.com',
+    'biswasabbya@gmail.com',
+    'connectwithabhijit@yahoo.in',
+    'daphneryan@rediffmail.com',
+    'das_tanya@yahoo.com',
+    'debdeep14985@gmail.com',
+    'doctorghosh@gmail.com',
+    'dr.arnabpalodhy@gmail.com',
+    'dr.soumitrakamar@gmail.com',
+    'dr.suprakashroy@gmail.com',
+    'drrupakkundusmc@gmail.com',
+    'dyutisg99@gmail.com',
+    'haldarutsav@gmail.com',
+    'ig18aaokolkata@gmail.com',
+    'ilachowdhary@gmail.com',
+    'indranil5673@gmail.com',
+    'jayantaray3@gmail.com',
+    'kakali1980datta@gmail.com',
+    'kaushambiroy@gmail.com',
+    'makhankumar@gmail.com',
+    'michael.chakravarti@gmail.com',
+    'milandutta1974@gmail.com',
+    'motilalm44@gmail.com',
+    'mukherjee.sanchari@gmail.com',
+    'nag.sandipan@gmail.com',
+    'niladri-86@live.com',
+    'pghosh06@gmail.com',
+    'piyalimtr68@gmail.com',
+    'preetamhira5@yahoo.co.in',
+    'proftkj@gmail.com',
+    'rahul.dev.roy.iitb@gmail.com',
+    'rahul_b_in@yahoo.com',
+    'rahul_hallmarks@yahoo.co.in',
+    'rakesh.ranjen@gmail.com',
+    'rkdey40@rediffmail.com',
+    's_flavien@yahoo.com',
+    'sahebarchi@gmail.com',
+    'samir.rse@gmail.com',
+    'samratkabiraj@gmail.com',
+    'sanjoysarkar02@gmail.com',
+    'sanmick03@gmail.com',
+    'sayanchatt151192@gmail.com',
+    'sayanjitghosh58@gmail.com',
+    'sayanti.mukherjee87@gmail.com',
+    'sghosh.cloud@gmail.com',
+    'shiladitya23@gmail.com',
+    'shomeshabnam@yahoo.co.in',
+    'shyamal1970@gmail.com',
+    'siddharthapal27@gmail.com',
+    'sig18aaokolkata@gmail.com,fm.signature18@gmail.com',
+    'soumit.kumar@gmail.com',
+    'subhajit.mukherjee971@gmail.com',
+    'subhasish.bhowmick@gmail.com',
+    'subratadrlahiri@gmail.com',
+    'subratamitra1967@gmail.com',
+    'sudeepwbpdcl@gmail.com',
+    'sumanta088@gmail.com',
+    'sumit.2bai@gmail.com',
+    'susmita_deb2@rediffmail.com',
+    'tapabrataray@yahoo.co.in',
+    'to.biswasps@gmail.com',
+    'tsen8116@gmail.com',
+    'viveknishi2021@gmail.com'
+  ]);
+
+  firebase.initializeApp(FIREBASE_CONFIG);
+  const fbAuth    = firebase.auth();
+  const gProvider = new firebase.auth.GoogleAuthProvider();
+  gProvider.setCustomParameters({prompt:'select_account'});
+
+  function doSignIn(){
+    document.getElementById('lsErr').classList.remove('show');
+    document.getElementById('lsLoading').classList.add('show');
+    document.getElementById('gSignInBtn').disabled=true;
+    fbAuth.signInWithPopup(gProvider).catch(()=>{
+      document.getElementById('lsLoading').classList.remove('show');
+      document.getElementById('gSignInBtn').disabled=false;
+      document.getElementById('lsErr').textContent='Sign-in failed. Please try again.';
+      document.getElementById('lsErr').classList.add('show');
+    });
+  }
+
+  function doSignOut(){ fbAuth.signOut(); }
+
+  fbAuth.onAuthStateChanged(user=>{
+    const screen  = document.getElementById('loginScreen');
+    const navArea = document.getElementById('navUserArea');
+    if(user){
+      const email = user.email.toLowerCase();
+      if(ALLOWED.has(email)){
+        screen.classList.add('hide');
+        setTimeout(()=>screen.style.display='none', 400);
+        document.getElementById('lsErr').classList.remove('show');
+        const photo = user.photoURL
+          ? '<img class="nav-user-photo" src="'+user.photoURL+'" alt=""/>'
+          : '<span style="width:28px;height:28px;border-radius:50%;border:2px solid var(--gold);background:rgba(201,162,51,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;">&#x1F464;</span>';
+        navArea.innerHTML='<div class="nav-user">'+photo+'<span class="nav-user-name">'+(user.displayName||email.split('@')[0])+'</span><button class="nav-signout" onclick="doSignOut()">Sign out</button></div>';
+      } else {
+        fbAuth.signOut();
+        screen.style.display='flex'; screen.classList.remove('hide');
+        document.getElementById('lsLoading').classList.remove('show');
+        document.getElementById('gSignInBtn').disabled=false;
+        document.getElementById('lsErr').textContent='Your account is not registered. Contact the Association.';
+        document.getElementById('lsErr').classList.add('show');
+      }
+    } else {
+      screen.style.display='flex'; screen.classList.remove('hide');
+      if(navArea) navArea.innerHTML='';
+      document.getElementById('lsLoading').classList.remove('show');
+      document.getElementById('gSignInBtn').disabled=false;
+    }
+  });
 </script>
 
 <!-- SUBMIT QUERY MODAL -->
@@ -1367,9 +1540,9 @@ const RESIDENTS=[
       </div>
     </div>
     <div id="paySuccess" style="display:none;" class="pay-success">
-      <div class="pay-success-icon">✅</div>
+      <div class="pay-success-icon">&#x2705;</div>
       <h4>Receipt Submitted!</h4>
-      <p>Your payment receipt has been sent to the Association.<br/>Your payment will be confirmed within 1–2 working days.</p>
+      <p>Your payment receipt has been sent to the Association.<br/>Your payment will be confirmed within 1&#8211;2 working days.</p>
       <button class="pay-new-btn" onclick="resetPay()">Submit Another</button>
     </div>
   </div>

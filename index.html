@@ -1242,70 +1242,92 @@ const RESIDENTS=[
   gProvider.setCustomParameters({prompt:'select_account'});
 
   function isSafari(){
-    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const ua = navigator.userAgent.toLowerCase();
+    return ua.includes('safari') && !ua.includes('chrome') && !ua.includes('android');
   }
 
   function doSignIn(){
-    document.getElementById('lsErr').classList.remove('show');
-    document.getElementById('lsLoading').classList.add('show');
-    document.getElementById('gSignInBtn').disabled=true;
+    const err  = document.getElementById('lsErr');
+    const load = document.getElementById('lsLoading');
+    const btn  = document.getElementById('gSignInBtn');
+    err.classList.remove('show');
+    load.classList.add('show');
+    btn.disabled = true;
     if(isSafari()){
-      // Safari blocks popups — use redirect instead
       fbAuth.signInWithRedirect(gProvider).catch(()=>{
-        document.getElementById('lsLoading').classList.remove('show');
-        document.getElementById('gSignInBtn').disabled=false;
-        document.getElementById('lsErr').textContent='Sign-in failed. Please try again.';
-        document.getElementById('lsErr').classList.add('show');
+        load.classList.remove('show'); btn.disabled=false;
+        err.textContent='Sign-in failed. Please try again.';
+        err.classList.add('show');
       });
     } else {
       fbAuth.signInWithPopup(gProvider).catch(()=>{
-        document.getElementById('lsLoading').classList.remove('show');
-        document.getElementById('gSignInBtn').disabled=false;
-        document.getElementById('lsErr').textContent='Sign-in failed. Please try again.';
-        document.getElementById('lsErr').classList.add('show');
+        load.classList.remove('show'); btn.disabled=false;
+        err.textContent='Sign-in failed. Please try again.';
+        err.classList.add('show');
       });
     }
   }
 
-  // Handle redirect result (Safari)
-  fbAuth.getRedirectResult().then(result=>{
-    // result handled by onAuthStateChanged
-  }).catch(()=>{
-    document.getElementById('lsLoading').classList.remove('show');
-    document.getElementById('gSignInBtn').disabled=false;
-  });
-
   function doSignOut(){ fbAuth.signOut(); }
 
-  fbAuth.onAuthStateChanged(user=>{
+  function handleUser(user){
     const screen  = document.getElementById('loginScreen');
     const navArea = document.getElementById('navUserArea');
+    const load    = document.getElementById('lsLoading');
+    const err     = document.getElementById('lsErr');
+    const btn     = document.getElementById('gSignInBtn');
     if(user){
       const email = user.email.toLowerCase();
       if(ALLOWED.has(email)){
+        // ✅ Authorised — unlock site
         screen.classList.add('hide');
-        setTimeout(()=>{screen.style.display='none';document.body.classList.remove('locked');}, 400);
-        document.getElementById('lsErr').classList.remove('show');
+        setTimeout(()=>{ screen.style.display='none'; document.body.classList.remove('locked'); }, 400);
+        err.classList.remove('show');
         const photo = user.photoURL
           ? '<img class="nav-user-photo" src="'+user.photoURL+'" alt=""/>'
           : '<span style="width:28px;height:28px;border-radius:50%;border:2px solid var(--gold);background:rgba(201,162,51,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;">&#x1F464;</span>';
         navArea.innerHTML='<div class="nav-user">'+photo+'<span class="nav-user-name">'+(user.displayName||email.split('@')[0])+'</span><button class="nav-signout" onclick="doSignOut()">Sign out</button></div>';
       } else {
+        // ❌ Not a resident
         fbAuth.signOut();
         screen.style.display='flex'; screen.classList.remove('hide');
-        document.getElementById('lsLoading').classList.remove('show');
-        document.getElementById('gSignInBtn').disabled=false;
-        document.getElementById('lsErr').textContent='Your account is not registered. Contact the Association.';
-        document.getElementById('lsErr').classList.add('show');
+        load.classList.remove('show'); btn.disabled=false;
+        err.textContent='Your account is not registered. Contact the Association.';
+        err.classList.add('show');
       }
     } else {
+      // Signed out — show login
       screen.style.display='flex'; screen.classList.remove('hide');
       document.body.classList.add('locked');
       if(navArea) navArea.innerHTML='';
-      document.getElementById('lsLoading').classList.remove('show');
-      document.getElementById('gSignInBtn').disabled=false;
+      load.classList.remove('show'); btn.disabled=false;
     }
+  }
+
+  // ── KEY FIX: Handle redirect FIRST before setting up onAuthStateChanged ──
+  // This prevents Safari redirect from flashing login screen on return
+  let redirectHandled = false;
+  fbAuth.getRedirectResult().then(result=>{
+    redirectHandled = true;
+    if(result && result.user){
+      // Redirect just completed — handleUser will be called by onAuthStateChanged
+    } else {
+      // No redirect in progress — safe to listen for auth state
+      fbAuth.onAuthStateChanged(handleUser);
+    }
+  }).catch(err=>{
+    redirectHandled = true;
+    fbAuth.onAuthStateChanged(handleUser);
+  }).finally(()=>{
+    // Fallback: if getRedirectResult never resolves (shouldn't happen), start listening anyway
+    setTimeout(()=>{ if(!redirectHandled) fbAuth.onAuthStateChanged(handleUser); }, 3000);
   });
+
+  // For non-Safari browsers, also start listening immediately
+  // (getRedirectResult resolves instantly with null for popup-based flows)
+  if(!isSafari()){
+    fbAuth.onAuthStateChanged(handleUser);
+  }
 </script>
 
 <!-- SUBMIT QUERY MODAL -->
